@@ -41,7 +41,7 @@ function OnlinePresence() {
                 return (
                   <div
                     key={index}
-                    className='group flex flex-col gap-6 cursor-pointer'>
+                    className='group flex flex-col gap-6 cursor-pointer'> 
                     <div className='relative '>
                       <Image
                         src={items.image}
