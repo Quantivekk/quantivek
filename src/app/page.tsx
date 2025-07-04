@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Achievements from "./components/home/achievements";
-import Brand from "./components/home/brand";
+// import Brand from "./components/home/brand";
 import CreativeMind from "./components/home/creative-mind";
 import CustomerStories from "./components/home/customer-stories";
 import Faq from "./components/home/faq";
@@ -12,7 +12,7 @@ import Subscription from "./components/home/subscription";
 import WebResult from "./components/home/web-result";
 
 export const metadata: Metadata = {
-    title: "Home | Awake Agency",
+    title: "Home | Quantivek Agency",
 };
 
 

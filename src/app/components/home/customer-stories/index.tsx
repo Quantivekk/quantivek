@@ -23,7 +23,7 @@ function CustomerStories() {
                   </span>
                   <div className='flex flex-col gap-6 '>
                     <h4 className='text-white'>
-                      “Awake’s expertise transformed my vision into success!”
+                      “Quantivek’s expertise transformed my vision into success!”
                     </h4>
                     <div className='flex flex-col gap-1'>
                       <p className='text-white font-medium'>Kabir Shah</p>
@@ -44,7 +44,7 @@ function CustomerStories() {
                       91%
                     </h2>
                     <h4 className='dark:text-dark_black'>
-                      Clients recommend our design services.”
+                      Clients recommend our design & development services.”
                     </h4>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ function CustomerStories() {
                       Customer stories
                     </span>
                     <h2 className='text-2xl lg:text-5xl'>
-                      “Awake Design Agency brought our ideas to life with
+                      “Quantivek Software Development Agency brought our ideas to life with
                       exceptional creativity and precision, exceeding
                       expectations.”
                     </h2>
