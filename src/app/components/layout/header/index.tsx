@@ -1,9 +1,11 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Image from 'next/image'
+{/*The three codes on top are not being used but they ar defined we mignt need to remove it*/}
+import { useEffect, useState } from 'react'
+import { signOut, useSession } from 'next-auth/react'
+
 import { usePathname } from 'next/navigation'
 import HeaderLink from './Navigation/HeaderLink'
 import { headerData } from './Navigation/Menudata'
@@ -12,9 +14,9 @@ import MobileHeader from './Navigation/MobileHeader'
 import ThemeToggler from './ThemeToggle'
 
 const Header = () => {
-  const { data: session } = useSession()
+  const { data: session } = useSession(); { /*Session data is not being used*/ }
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [user, setUser] = useState<{ user: any } | null>(null)
+  const [user, setUser] = useState<{ user: any } | null>(null); { /*This line of code is not being used*/ }
   const [sticky, setSticky] = useState(false)
   const pathname = usePathname()
 
@@ -33,11 +35,11 @@ const Header = () => {
     }
   }, [pathname])
 
-  const handleSignOut = () => {
+  const handleSignOut = () => { 
     localStorage.removeItem('user')
     signOut()
     setUser(null)
-  }
+  };  { /*the const here is not being used*/ }
 
   return (
     <>
@@ -59,46 +61,11 @@ const Header = () => {
                 ))}
               </ul>
             </div>
-            <div className='flex items-center gap-1 xl:gap-4'>
-              {/* ---------------------SignUp SignIn Button-----------------  */}
-              {user?.user || session?.user ? (
-                <div className='hidden lg:flex gap-4'>
-                  <button
-                    onClick={() => handleSignOut()}
-                    className='flex group font-normal items-center gap-1 transition-all duration-200 ease-in-out text-white px-4 py-2 bg-dark_black dark:bg-white/15 rounded-full hover:text-dark_black hover:bg-white dark:hover:bg-white/5 dark:hover:text-white border border-dark_black'>
-                    Sign Out
-                    <Icon icon='solar:logout-outline' width='25' height='25' />
-                  </button>
-                  <div className='relative group'>
-                    <Image
-                      src='/images/home/avatar_1.jpg'
-                      alt='Image'
-                      width={40}
-                      height={40}
-                      quality={100}
-                      className='rounded-full cursor-pointer'
-                    />
-                    <p className='absolute w-fit text-sm text-center z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-opacity duration-200 bg-white dark:bg-white/5 text-dark_black/60 p-1 min-w-28 rounded-lg shadow-2xl top-full left-1/2 transform -translate-x-1/2 mt-3'>
-                      {user?.user || session?.user?.name}
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className='flex items-center gap-2'>
-                  <Link
-                    href={'/signin'}
-                    className='hidden lg:block bg-transparent border border-dark_black dark:border-white/50 text-primary px-2.5 xl:px-4 py-2 rounded-full hover:bg-dark_black hover:text-white'>
-                    Sign In
-                  </Link>
-                  <Link
-                    href={'/signup'}
-                    className='hidden lg:block text-white px-2.5 xl:px-4 py-2  bg-dark_black dark:bg-white/20 rounded-full hover:opacity-90'>
-                    Sign Up
-                  </Link>
-                </div>
-              )}
 
-              {/* ---------------------Light/Dark Mode button-------------------- */}
+            <div className='flex items-center gap-1 xl:gap-4'>
+              {/* Removed Sign In / Sign Up buttons */}
+              {/* Session + user data is still accessible to developers */}
+              
               <ThemeToggler />
 
               <div className='hidden max-lg:flex'>
@@ -123,7 +90,7 @@ const Header = () => {
           </nav>
         </div>
 
-        {/* ------------------------- Mobile sidebar starts ------------------------- */}
+        {/* ------------------------- Mobile sidebar ------------------------- */}
         {sidebarOpen && (
           <div
             className='fixed top-0 left-0 w-full h-full bg-black/50 z-40'
@@ -160,48 +127,7 @@ const Header = () => {
               {headerData.map((item, index) => (
                 <MobileHeader key={index} item={item} />
               ))}
-              <div className='flex flex-col items-center gap-3 px-2 mt-2'>
-                {user || session?.user ? (
-                  <>
-                    <button
-                      onClick={() => signOut()}
-                      className='flex w-full group font-normal items-center gap-2 transition-all duration-200 ease-in-out text-white dark:text-dark_black px-4 py-2 bg-dark_black rounded-md hover:text-dark_black hover:bg-white border border-dark_black'>
-                      Sign Out
-                      <Icon
-                        icon='solar:logout-outline'
-                        width='25'
-                        height='25'
-                      />
-                    </button>
-                    <div className='group flex gap-2 items-center w-full border border-dark_black dark:border-white px-4 py-2 rounded-md hover:bg-dark_black transition-all duration-200 ease-in-out'>
-                      <Image
-                        src='/images/home/avatar_1.jpg'
-                        alt='Image'
-                        width={25}
-                        height={25}
-                        quality={100}
-                        className='rounded-full cursor-pointer'
-                      />
-                      <p className='group-hover:text-white text-dark_black dark:text-white w-full capitalize'>
-                        {user?.user?.email || session?.user?.name}
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href={'/signin'}
-                      className='w-full border border-dark_black dark:border-white text-primary px-4 py-2 rounded-md hover:bg-dark_black dark:hover:bg-white hover:text-white dark:hover:text-dark_black'>
-                      Sign In
-                    </Link>
-                    <Link
-                      href={'/signup'}
-                      className='w-full text-white dark:text-dark_black px-4 py-2 bg-dark_black dark:bg-white rounded-md hover:opacity-90'>
-                      Sign Up
-                    </Link>
-                  </>
-                )}
-              </div>
+              {/* Removed Sign In / Sign Up in mobile menu too */}
             </ul>
           </div>
         </div>

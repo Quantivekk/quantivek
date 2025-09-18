@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import {
+import type {
   avatar,
   brand,
   innovation,
@@ -18,7 +18,7 @@ const avatarList: avatar[] = [
   },
   {
     image: '/images/home/avatar_2.jpg',
-    title: 'Olivia Miller',
+    title: 'Osaade Abraham',
   },
   {
     image: '/images/home/avatar_3.jpg',
@@ -96,47 +96,47 @@ const onlinePresenceList: onlinePresence[] = [
     image: '/images/home/onlinePresence/online_img_1.jpg',
     title: 'FlowBank',
     tag: ['UX Research', 'Interface Design'],
-    link: 'https://www.wrappixel.com/',
+    link: '',
   },
   {
     image: '/images/home/onlinePresence/online_img_2.jpg',
     title: 'Academy.co',
     tag: ['Product Design', 'Interaction Design'],
-    link: 'https://www.wrappixel.com/',
+    link: '',
   },
   {
     image: '/images/home/onlinePresence/online_img_3.jpg',
     title: 'Genome',
     tag: ['Brand identity design', 'UX Research'],
-    link: 'https://www.wrappixel.com/',
+    link: '',
   },
   {
     image: '/images/home/onlinePresence/online_img_4.jpg',
     title: 'Hotto',
     tag: ['Visual Storytelling', 'Web & Mobile Design'],
-    link: 'https://www.wrappixel.com/',
+    link: '',
   },
 ]
 
 const creativeMindList: creativeMind[] = [
   {
     image: '/images/home/creative/creative_img_1.png',
-    name: 'Logan Dang',
-    position: 'WordPress Developer',
+    name: 'Christopher Uchenna',
+    position: 'CEO & Founder',
     twitterLink: 'https://x.com/',
     linkedinLink: 'https://in.linkedin.com/',
   },
   {
     image: '/images/home/creative/creative_img_2.png',
-    name: 'Ana Belić',
+    name: 'Phrophecy Odetunde',
     position: 'Social Media Specialist',
     twitterLink: 'https://x.com/',
     linkedinLink: 'https://in.linkedin.com/',
   },
   {
     image: '/images/home/creative/creative_img_3.png',
-    name: 'Brian Hanley',
-    position: 'Product Designer',
+    name: 'Osaade Abraham',
+    position: 'Frontend Developer',
     twitterLink: 'https://x.com/',
     linkedinLink: 'https://in.linkedin.com/',
   },
@@ -176,17 +176,15 @@ const startupPlanList: startupPlan[] = [
     text_color: 'text-dark_black',
     descp_color: 'dark_black/60',
     border_color: 'border-dark_black/10',
-    plan_name: 'Starter',
-    plan_descp: 'For companies who need design support. One request at a time',
-    plan_price: '$2500',
+    plan_name: 'Starter Plan',
+    plan_descp: 'Ideal for small projects and startups',
+    plan_price: '150k - 250k NGN',
     icon_img: '/images/home/startupPlan/white_tick.svg',
     plan_feature: [
-      'Design Updates Every 2 Days',
-      'Mid-level Designer',
-      'SEO optimization',
-      'Monthly analytics',
-      '2x Calls Per Month',
-      'License free assets',
+      '1-5 pages website or simple app',
+      'Basic UI/UX Design',
+      'Brand Consultation (1 session)',
+      'Basic SEO Setup',
     ],
   },
   {
@@ -194,51 +192,79 @@ const startupPlanList: startupPlan[] = [
     text_color: 'text-white',
     descp_color: 'white/60',
     border_color: 'border-white/10',
-    plan_name: 'Pro',
-    plan_descp: '2x the speed. Great for an MVP, Web App or complex problem',
-    plan_price: '$3800',
+    plan_name: 'Growth Plan',
+    plan_descp: 'Best for growing businesses',
+    plan_price: '350k - 600k NGN',
     icon_img: '/images/home/startupPlan/black_tick.svg',
     plan_feature: [
-      'Design Updates Daily',
-      'Senior-level Designer',
-      'AI Advisory Framework',
-      'Full-service Creative Team',
-      '4x Calls Per Month',
-      'License free assets',
+      '6-15 pages website or medium sized app',
+      'Standard UI/UX Design',
+      'Brand Strategy + Positioning (2-3 sessions)',
+      'Digital Marketing Setup (Google & Social Media)',
+      'Analytics & Reporting dashboard',
+    ],
+  },
+  {
+    plan_bg_color: 'bg-purple',
+    text_color: 'text-white',
+    descp_color: 'white/60',
+    border_color: 'border-white/10',
+    plan_name: 'Premium Plan',
+    plan_descp: 'Tailored for established companies',
+    plan_price: '800k-1.2m NGN',
+    icon_img: '/images/home/startupPlan/black_tick.svg',
+    plan_feature: [
+      'Advanced custom website/app development',
+      'Complete UI/UX Design & testing',
+      'In-depth brand strategy workshops',
+      'Digital Marketing campaigns & SEO',
+      'Full analytics + monthly reporting',
+      '3 months post-launch support',
+    ],
+  },
+  {
+    plan_bg_color: 'bg-black',
+    text_color: 'text-white',
+    descp_color: 'white/60',
+    border_color: 'border-white/10',
+    plan_name: 'Enterprise Plan',
+    plan_descp: 'Large scale solutions for enterprises',
+    plan_price: '2m+ NGN',
+    icon_img: '/images/home/startupPlan/black_tick.svg',
+    plan_feature: [
+      'Multi-platform systems (Web + Mobile)',
+      'Dedicated consultation & project management',
+      'Full-service digital marketing & analytics integration',
+      'Long-term support & scaling strategy',
     ],
   },
 ]
 
 const faqList: faq[] = [
   {
-    faq_que: 'What services does Awake Agency offer?',
+    faq_que: 'What services does Quantivek offer?',
     faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
+      'Web & app development, SaaS solutions, hosting, and digital marketing services - all in one place.',
   },
   {
     faq_que: 'How long does a typical project take?',
     faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
+      'Most projects wrap up within 2-6 weeks, depending on complexity and requirements.',
   },
   {
-    faq_que: 'How is pricing structured at Awake Agency?',
+    faq_que: 'How is pricing structured at Quantivek?',
     faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
+      'We offer flexible, project-based pricing tailored to your specific needs and budget.',
   },
   {
     faq_que: 'Do you offer ongoing support after project completion?',
     faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
+      'Yes, we provide maintenance and support to keep your project running smoothly.',
   },
   {
     faq_que: 'How often will I receive updates on my project?',
     faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
-  },
-  {
-    faq_que: 'How often will I receive updates on my project?',
-    faq_ans:
-      'Yes, we provide post-launch support to ensure smooth implementation and offer ongoing maintenance packages for clients needing regular updates or technical assistance.',
+      "We share regular progress updates - weekly or as agreed - so you're always in the loop.",
   },
 ]
 
@@ -250,15 +276,15 @@ const achievementsList: achievements[] = [
     title:
       'Celebrated for cutting-edge interaction design and seamless user experiences.',
     year: '2024',
-    url: 'https://www.framer.com/@wrap-pixel/',
+    url: '',
   },
   {
     icon: '/images/home/achievement/dribble_award.svg',
     dark_icon: '/images/home/achievement/dribble_award.svg',
     sub_title: 'Dribbble Awards',
-    title: 'Recognized for creative excellence and innovative design solutions',
+    title: 'Recognized for creative excellence and innovative design solutions.',
     year: '2023',
-    url: 'https://www.framer.com/@wrap-pixel/',
+    url: '',
   },
   {
     icon: '/images/home/achievement/awward_award.svg',
@@ -267,10 +293,9 @@ const achievementsList: achievements[] = [
     title:
       'Honored with the Best Website Design for creativity, usability, and innovation.',
     year: '2022',
-    url: 'https://www.framer.com/@wrap-pixel/',
+    url: '',
   },
 ]
-
 
 export const GET = async () => {
   return NextResponse.json({
@@ -283,5 +308,5 @@ export const GET = async () => {
     startupPlanList,
     faqList,
     achievementsList,
-  });
-};
+  })
+}

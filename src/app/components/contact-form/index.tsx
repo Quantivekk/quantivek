@@ -13,7 +13,8 @@ function ContactForm() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loader, setLoader] = useState(false)
-  const handleChange = (e: any) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prevData) => ({
       ...prevData,
@@ -22,66 +23,56 @@ function ContactForm() {
   }
 
   const reset = () => {
-    formData.name = ''
-    formData.email = ''
-    formData.interest = 'design & branding'
-    formData.budget = ''
-    formData.message = ''
+    setFormData({
+      name: '',
+      email: '',
+      interest: 'design & branding',
+      budget: '',
+      message: '',
+    })
   }
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoader(true)
 
     fetch('https://formsubmit.co/ajax/bhainirav772@gmail.com', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        interest: formData.interest,
-        budget: formData.budget,
-        message: formData.message,
-      }),
+      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-
         setSubmitted(data.success)
         reset()
       })
       .catch((error) => {
         console.log(error.message)
       })
+      .finally(() => {
+        setLoader(false)
+      })
   }
 
   return (
     <section>
-      <div className='relative w-full pt-44 2xl:pb-20 pb-10 before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10 before:rounded-full before:top-24 before:blur-3xl  before:-z-10'>
+      <div className='relative w-full pt-44 2xl:pb-20 pb-10 before:absolute before:w-full before:h-full before:bg-linear-to-r before:from-blue_gradient before:via-white before:to-yellow_gradient dark:before:from-dark_blue_gradient dark:before:via-black dark:before:to-dark_yellow_gradient dark:before:rounded-full dark:before:blur-3xl dark:before:-z-10 before:rounded-full before:top-24 before:blur-3xl before:-z-10'>
         <div className='container relative z-10'>
           <div className='flex flex-col gap-10 md:gap-20'>
             <div className='relative flex flex-col text-center items-center'>
               <h2 className='font-medium w-full max-w-32'>
                 Love to hear from you, Get in
-                <span className='instrument-font italic font-normal dark:text-white/70'>
-                  {' '}
-                  touch
-                </span>
+                <span className='instrument-font italic font-normal dark:text-white/70'> touch</span>
               </h2>
             </div>
+
             {submitted ? (
               <div className='flex flex-col items-center gap-5 text-center max-w-xl mx-auto p-6 rounded-lg bg-green/20 dark:bg-white/5'>
-                <div className='flex'>
-                  <Icon
-                    icon='ix:success-filled'
-                    width='30'
-                    height='30'
-                    style={{ color: '#79D45E' }}
-                  />
+                <div className='flex items-center gap-2'>
+                  <Icon icon='ix:success-filled' width='30' height='30' style={{ color: '#79D45E' }} />
                   <h5 className='text-green dark:text-green'>
-                    Great!!! Email has been Successfully Sent. We will get in
-                    touch asap.
+                    Great!!! Email has been Successfully Sent. We will get in touch asap.
                   </h5>
                 </div>
 
@@ -103,7 +94,7 @@ function ContactForm() {
                       height='32'
                       rx='16'
                       fill='white'
-                      className=' transition-colors duration-200 ease-in-out fill-black'
+                      className='transition-colors duration-200 ease-in-out fill-black'
                     />
                     <path
                       d='M11.832 11.3334H20.1654M20.1654 11.3334V19.6668M20.1654 11.3334L11.832 19.6668'
@@ -111,21 +102,18 @@ function ContactForm() {
                       strokeWidth='1.42857'
                       strokeLinecap='round'
                       strokeLinejoin='round'
-                      className=' transition-colors duration-200 ease-in-out stroke-white'
+                      className='transition-colors duration-200 ease-in-out stroke-white'
                     />
                   </svg>
                 </Link>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className='flex flex-col bg-white dark:bg-dark_black rounded-2xl p-8 gap-8'>
-                <div className='flex flex-col md:flex md:flex-row gap-6'>
+              <form onSubmit={handleSubmit} className='flex flex-col bg-white dark:bg-dark_black rounded-2xl p-8 gap-8'>
+                <div className='flex flex-col md:flex-row gap-6'>
                   <div className='w-full'>
                     <label htmlFor='name'>Your Name</label>
                     <input
-                      className='w-full mt-2 rounded-full border px-5 py-3 outline-hidden transition dark:border-white/20
-                                                focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
+                      className='w-full mt-2 rounded-full border px-5 py-3 outline-hidden transition dark:border-white/20 focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
                       id='name'
                       type='text'
                       name='name'
@@ -137,8 +125,7 @@ function ContactForm() {
                   <div className='w-full'>
                     <label htmlFor='email'>Your Email</label>
                     <input
-                      className='w-full mt-2 rounded-full border px-5 py-3 outline-hidden transition dark:border-white/20
-                                                focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
+                      className='w-full mt-2 rounded-full border px-5 py-3 outline-hidden transition dark:border-white/20 focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
                       id='email'
                       type='email'
                       name='email'
@@ -148,24 +135,26 @@ function ContactForm() {
                     />
                   </div>
                 </div>
-                <div className='flex flex-col md:flex md:flex-row gap-6'>
+
+                <div className='flex flex-col md:flex-row gap-6'>
                   <div className='w-full'>
-                    <label htmlFor='interest'>
-                      What are you interested in?
-                    </label>
+                    <label htmlFor='interest'>What are you interested in?</label>
                     <select
                       className='w-full mt-2 text-base px-4 rounded-full py-2.5 border transition-all duration-500 dark:border-white/20 focus:outline-0 dark:bg-black/40'
                       name='interest'
                       id='interest'
                       value={formData.interest}
                       onChange={handleChange}>
-                      <option value='design & branding'>
-                        Design & Branding
-                      </option>
+                      <option value='design & branding'>Design & Branding</option>
+                      <option value='Digital Marketing'>Digital Marketing</option>
+                      <option value='UI/UX Design'>UI/UX Design</option>
+                      <option value='Analytics and Reporting'>Analytics and Reporting</option>
+                      <option value='Web Development'>Web Development</option>
                       <option value='Ecommerce'>Ecommerce</option>
                       <option value='Specialist'>Specialist</option>
                     </select>
                   </div>
+
                   <div className='w-full'>
                     <label htmlFor='budget'>Project budget</label>
                     <select
@@ -175,29 +164,32 @@ function ContactForm() {
                       value={formData.budget}
                       onChange={handleChange}>
                       <option value=''>Select your budget</option>
-                      <option value='$10000'>$10,000</option>
-                      <option value='$50500'>$50,500</option>
+                      <option value='150K to 250K'>150,000 - 250,000</option>
+                      <option value='350K to 600K'>350,000 - 600,000</option>
+                      <option value='800K to 1.2M'>800,000 - 1,200,000</option>
+                      <option value='2M+'>2,000,000+</option>
                     </select>
                   </div>
                 </div>
+
                 <div className='w-full'>
                   <label htmlFor='message'>Message</label>
                   <textarea
-                    className='w-full mt-2 rounded-3xl border px-5 py-3 outline-hidden transition dark:border-white/20
-                                        focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
+                    className='w-full mt-2 rounded-3xl border px-5 py-3 outline-hidden transition dark:border-white/20 focus:border-dark_black/50 dark:focus:border-white/50 dark:bg-black/40'
                     name='message'
                     id='message'
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder='Let tell us know your project about'
+                    placeholder='Let us know about your project'
                     rows={4}
                   />
                 </div>
+
                 <div>
                   {!loader ? (
                     <button
                       type='submit'
-                      className='group w-fit text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center gap-4 py-2 pl-5 pr-2 transition-all duration-200 ease-in-out  hover:bg-transparent border hover:text-dark_black border-dark_black'>
+                      className='group w-fit text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center gap-4 py-2 pl-5 pr-2 transition-all duration-200 ease-in-out hover:bg-transparent border hover:text-dark_black border-dark_black'>
                       <span className='transform transition-transform duration-200 ease-in-out group-hover:translate-x-10'>
                         Let’s Collaborate
                       </span>
@@ -213,7 +205,7 @@ function ContactForm() {
                           height='32'
                           rx='16'
                           fill='white'
-                          className='fill-white dark:fill-black transition-colors duration-200 ease-in-out group-hover:fill-black '
+                          className='fill-white dark:fill-black transition-colors duration-200 ease-in-out group-hover:fill-black'
                         />
                         <path
                           d='M11.832 11.3334H20.1654M20.1654 11.3334V19.6668M20.1654 11.3334L11.832 19.6668'

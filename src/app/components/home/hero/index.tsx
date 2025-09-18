@@ -5,17 +5,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import StarRating from '../../shared/star-rating'
 
+type Avatar = {
+  image: string
+  title?: string
+}
+
 function HeroSection() {
-  const ref = useRef(null)
-   const [avatarList, setAvatarList] = useState<any>(null);
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [avatarList, setAvatarList] = useState<Avatar[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch('/api/page-data')
         if (!res.ok) throw new Error('Failed to fetch')
-        const data = await res.json()        
-        setAvatarList(data)
+        const data = await res.json()
+        setAvatarList(data.avatarList || [])
       } catch (error) {
         console.error('Error fetching services:', error)
       }
@@ -53,6 +58,7 @@ function HeroSection() {
               </p>
             </motion.div>
 
+            {/* ---------------- cta + avatars ---------------- */}
             <motion.div
               {...bottomAnimation}
               className='flex flex-col items-center justify-center gap-4'>
@@ -97,25 +103,24 @@ function HeroSection() {
                 {/* --------------- avatar division -------------- */}
                 <div className='flex items-center gap-7'>
                   <ul className='avatar flex flex-row items-center'>
-                    {avatarList?.avatarList?.map((items:any, index:any) => (
-                      <li key={index} className='-mr-2 z-1 avatar-hover:ml-2'>
+                    {avatarList.map((item, index) => (
+                      <li key={index} className='-mr-2 z-[1] hover:ml-2'>
                         <Image
-                          src={items.image}
-                          alt='Image'
+                          src={item.image}
+                          alt={item.title || 'Client Avatar'}
                           width={44}
                           height={44}
                           quality={100}
                           className='rounded-full border-2 border-white'
-                          unoptimized={true}
+                          unoptimized
                         />
                       </li>
                     ))}
                   </ul>
+
                   {/* -------------- Star rating division --------------- */}
                   <div className='gap-1 flex flex-col'>
-                    <div>
-                      <StarRating count={4} color='#F59E0B' />
-                    </div>
+                    <StarRating count={4} color='#F59E0B' />
                     <p className='text-sm font-normal text-dark_black/60 dark:text-white/60'>
                       Trusted by 1000+ clients
                     </p>
