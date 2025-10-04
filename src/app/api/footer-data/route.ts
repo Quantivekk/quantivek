@@ -48,7 +48,7 @@ const footerData = {
     },
     contactDetails: {
         name:"Contact Details",
-        address: "81 Rivington Street London EC2A 3AY",
+        address: "10 Anuoluwapo close, off opebi road, Ikeja, Lagos, Nigeria",
         email: "quantivek@gmail.com",
         phone: "+234-7012528929; +234-9132549348"
     },

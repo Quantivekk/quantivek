@@ -276,7 +276,7 @@ const achievementsList: achievements[] = [
     title:
       'Celebrated for cutting-edge interaction design and seamless user experiences.',
     year: '2024',
-    url: '',
+    url: '#!',
   },
   {
     icon: '/images/home/achievement/dribble_award.svg',
@@ -284,7 +284,7 @@ const achievementsList: achievements[] = [
     sub_title: 'Dribbble Awards',
     title: 'Recognized for creative excellence and innovative design solutions.',
     year: '2023',
-    url: '',
+    url: '#!',
   },
   {
     icon: '/images/home/achievement/awward_award.svg',
@@ -293,7 +293,7 @@ const achievementsList: achievements[] = [
     title:
       'Honored with the Best Website Design for creativity, usability, and innovation.',
     year: '2022',
-    url: '',
+    url: '#!',
   },
 ]
 
